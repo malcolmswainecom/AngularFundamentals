@@ -14,6 +14,7 @@ import { Error404Component } from './404.component'
 import { EventListResolver } from './shared/events-list-resolver.service'
 import { CreateSessionComponent } from './events/ceate-session.component'
 import { SimpleModalComponent } from './shared/simple-modal.component'
+import { UpvoteComponent } from './events/upvote.component'
 
 let jQuery = window['$']
 
@@ -27,7 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SessionListComponent } from './events/session-list.component';
 import { CollapsibleWellComponent } from './shared/collapsible-well.component'
 import { DurationPipe } from './shared/duration.pipe';
-
+import { VoterService } from './shared/voter.service';
 
 
 @NgModule({
@@ -44,7 +45,8 @@ import { DurationPipe } from './shared/duration.pipe';
     CollapsibleWellComponent,
     DurationPipe,
     SimpleModalComponent,
-    ModalTriggerDirective
+    ModalTriggerDirective,
+    UpvoteComponent
   ],
   imports: [
     BrowserModule,
@@ -57,7 +59,8 @@ import { DurationPipe } from './shared/duration.pipe';
       ToastrService, 
       EventListResolver, 
       AuthService,
-      {provide: JQUERY_TOKEN, useValue: jQuery}
+      { provide: JQUERY_TOKEN, useValue: jQuery },
+      VoterService
     ],
   bootstrap: [MalcsComponent]
 })
