@@ -13,14 +13,21 @@ import { ToastrService } from './shared/toastr.service'
 import { Error404Component } from './404.component'
 import { EventListResolver } from './shared/events-list-resolver.service'
 import { CreateSessionComponent } from './events/ceate-session.component'
+import { SimpleModalComponent } from './shared/simple-modal.component'
 
+let jQuery = window['$']
+
+import { JQUERY_TOKEN } from './shared/jQuery.service';
+import { ModalTriggerDirective } from './shared/modal-trigger.directive';
 
 import { appRoutes } from './routes'
 import { AuthService } from './user/auth.service';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SessionListComponent } from './events/session-list.component';
 import { CollapsibleWellComponent } from './shared/collapsible-well.component'
 import { DurationPipe } from './shared/duration.pipe';
+
 
 
 @NgModule({
@@ -35,7 +42,9 @@ import { DurationPipe } from './shared/duration.pipe';
     CreateSessionComponent,
     SessionListComponent,
     CollapsibleWellComponent,
-    DurationPipe
+    DurationPipe,
+    SimpleModalComponent,
+    ModalTriggerDirective
   ],
   imports: [
     BrowserModule,
@@ -43,7 +52,13 @@ import { DurationPipe } from './shared/duration.pipe';
     ReactiveFormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [EventService, ToastrService, EventListResolver, AuthService],
+  providers: [
+      EventService, 
+      ToastrService, 
+      EventListResolver, 
+      AuthService,
+      {provide: JQUERY_TOKEN, useValue: jQuery}
+    ],
   bootstrap: [MalcsComponent]
 })
 export class AppModule { }

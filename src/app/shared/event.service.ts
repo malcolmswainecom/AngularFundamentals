@@ -35,13 +35,13 @@ export class EventService {
     }
 
     searchSessions(searchTerm:string){
-      var term = searchTerm.toLowerCase();
+      var term = searchTerm ? searchTerm.toLowerCase() : searchTerm;
       var results: ISession[] = [];
 
       Events.forEach(event => {
-          var matchingSessions = event.sessions.filter(session => {
+          var matchingSessions = event.sessions.filter(session => 
             session.name.toLowerCase().indexOf(term) > -1
-          })
+          )
           matchingSessions = matchingSessions.map((session:any) => {
             session.eventId = event.id;
             return session;
