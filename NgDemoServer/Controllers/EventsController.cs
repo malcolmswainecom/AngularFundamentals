@@ -15,8 +15,6 @@ namespace NgDemoServer.Controllers
     [Route("api/events")]
     public class EventsController : ControllerBase
     {
-      
-
         private readonly ILogger<WeatherForecastController> _logger;
 
         public EventsController(ILogger<WeatherForecastController> logger)
@@ -24,48 +22,13 @@ namespace NgDemoServer.Controllers
             _logger = logger;
         }
 
-    //[HttpGet]
-    //[Produces("application/json")]
-    //public IActionResult Get()
-    //{
-    //  string yourJson = Events;
-    //  return Content(yourJson, "application/json");
-
-    //}
-
-    //[HttpGet]
-    //public HttpResponseMessage Get()
-    //{
-
-    //  var resp = new HttpResponseMessage()
-    //  {
-    //    Content = new StringContent(Events)
-    //  };
-    //  resp.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-    //  return resp;
-
-    //  //return new ContentResult
-    //  //{
-    //  //  Content = Events,
-    //  //  ContentType = "application/json"
-    //  //};
-
-
-    //  //return new JsonResult(Events);
-    //}
-
-
-    [HttpGet]
+        [HttpGet]
         public JsonStringResult Get()
         {
-
-      var myJsonString = System.IO.File.ReadAllText("C:\\Projects\\Spikes\\AngularFundamentals\\ng-fundamentals1\\NgDemoServer\\events.json");
-      
-      return new JsonStringResult(myJsonString);
+          var myJsonString = System.IO.File.ReadAllText("C:\\Projects\\Spikes\\AngularFundamentals\\ng-fundamentals1\\NgDemoServer\\events.json");
+          return new JsonStringResult(myJsonString);
+        }
     }
-
-       
-  }
 }
 
 public class JsonStringResult : ContentResult
