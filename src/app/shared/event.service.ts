@@ -1,21 +1,51 @@
 import { Injectable, EventEmitter } from '@angular/core'
-import { Subject } from 'rxjs'
+import { throwError, Observable, of, pipe, } from 'rxjs'
 import { IEvent, ISession } from '../shared/event.model'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { catchError, tap } from 'rxjs/operators'
 
 
 @Injectable()
 export class EventService {
     
+  httpServerAddress:String = 'http://localhost:62635'
+  
+  constructor(private httpClient: HttpClient){
+
+    }
   
     getEvents(){
-
-      let subject = new Subject();
-      setTimeout(() => {
-        subject.next(Events);
-        subject.complete();
-      })
-      return subject;
+      
+      let url = `${this.httpServerAddress}/api/events`
+      return this.httpClient.get<any[]>(url)
+        .pipe(
+          tap(
+            _ => console.log('fetched events'
+        )), 
+        catchError(this.handleError))
+        
     }
+
+    // private handleError<T> (operation = 'operation', result?: T){
+    //   return (error:any) : Observable<T> => {
+    //     console.error(error)
+    //     return of(result as T)
+    //   }
+    // }
+
+    private handleError(err: HttpErrorResponse) {
+ 
+      let errorMessage = 'sd';
+      if (err.error instanceof ErrorEvent) {
+
+          errorMessage = `An error occurred: ${err.error.message}`;
+      } else {
+
+          errorMessage = `Server returned code: ${err.status}, error message is: ${err.message}`;
+      }
+      console.error(errorMessage);
+      return throwError(errorMessage);
+  }
 
     getEvent(id:number) :IEvent{
         return Events.find(event => event.id === id)

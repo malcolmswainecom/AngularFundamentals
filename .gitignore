@@ -37,3 +37,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+/NgDemoServer/.vs/NgDemoServer
+/NgDemoServer/bin/Debug/netcoreapp3.1
+/NgDemoServer/obj
